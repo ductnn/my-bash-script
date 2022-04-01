@@ -11,7 +11,7 @@ touch server.js
 touch README.md
 npm i express dotenv body-parser pug multer --save
 npm jsonwebtoken --save
-npm node-localsrorage --save
+npm node-localstorage --save
 
 # Make folder
 mkdir config
@@ -47,7 +47,6 @@ echo "# README please !!!" > README.md
 # File .gitignore
 echo -e "# node_modules \nnode_modules 
 		\n# dotenv \n.env 
-		\n# Logs \npackage-lock.json 
 	" > .gitignore
 
 
