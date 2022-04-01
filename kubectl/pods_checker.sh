@@ -24,7 +24,7 @@ do
             echo -e "\e[1;31mDuma !"$rescolor""
             let sml=sml+1
         else
-            echo -e "\e[32mOK \n"
+            echo -e "OK \n"
             let ok=ok+1
         fi
 done
