@@ -20,7 +20,7 @@ mkdir docker
 cd docker
 mkdir mysql redis
 cd mysql
-curl > docker-compose.yml
+curl https://raw.githubusercontent.com/ductnn/my-bash-script/master/package/docker-compose-mysql.yml > docker-compose.yml
 cd ..
 cd redis
-curl > docker-compose.yml
+curl https://raw.githubusercontent.com/ductnn/my-bash-script/master/package/docker-compose-redis.yml > docker-compose.yml
