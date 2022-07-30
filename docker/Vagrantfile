@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      apt-get install -y net-tools cgroup-tools gcc
+      apt-get install \
+          ca-certificates \
+          curl \
+          gnupg \
+          lsb-release -y
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      echo \
+        "deb [arch=$(dpkg --print-architecture) \
+        signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+        https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+      apt-get update
+      apt-get install -y docker-ce \
+        docker-ce-cli \
+        containerd.io \
+        docker-compose-plugin \
+        jq
+      usermod -a -G docker vagrant
+    SHELL
+    config.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "2048"
+      vb.cpus = 1
+    end
+    config.vm.box = "ubuntu/focal64"
+    config.vm.box_check_update = false
+  
+    config.vm.define "container" do |container|
+      container.vm.hostname = "container"
+    end
+  
+    # config.vm.define "external" do |external|
+    #   external.vm.hostname = "external"
+    # end  
+  end
+  
