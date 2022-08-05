@@ -7,12 +7,13 @@ host=$(hostname)
 # loop through all containers
 for container in $containers
 do
-  echo "Container: $container"
+  echo ======== Container: $container ========
+  # echo "  Container: $container"
   percentages=($(sudo docker exec $container /bin/sh -c "df -h | grep -vE '^Filesystem|shm|boot' | awk '{ print +\$5 }'"))
   mounts=($(sudo docker exec $container /bin/sh -c "df -h | grep -vE '^Filesystem|shm|boot' | awk '{ print \$6 }'"))
 
   for index in ${!mounts[*]}; do
-    echo "Mount ${mounts[index]}: ${percentages[index]}%"
+    echo "  Mount ${mounts[index]}: ${percentages[index]}%"
 
     if (( ${percentages[index]} > 70 )); then
       message="[ERROR] At $host and Docker container $container the mount ${mounts[index]} is at ${percentages[index]}% of its disk space. Please check this."
@@ -21,5 +22,6 @@ do
     fi
 
   done
-  echo ================= END =================
+  echo ============= END =============
+  echo -e "\n"
 done
