@@ -6,12 +6,6 @@ logc() {
 
   if [[ $container != '' ]]; then
     echo -e "\n  \033[1mDocker image:\033[0m" $container
-
-    # if [[ $@ == '' ]]; then
-	# 	read -e -p $'  \e[1mCommand: \e[0m' cmd
-    # else
-	# 	cmd="$@"
-    # fi
     echo ''
     history -s logc "$@"
     history -s docker logs -f $container
