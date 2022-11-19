@@ -1,8 +1,9 @@
 ######## MONO Packages ########
 
 # Install common packages
+sudo apt update
 sudo apt install zip make -y
-sudo apt-get install pcscd -y
+sudo apt install pcscd -y
 sudo service pcscd start
 
 # Docker
